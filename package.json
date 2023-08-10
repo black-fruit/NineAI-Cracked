@@ -23,7 +23,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "pkg:win": "pkg . -t node16-win-x64 -o app-win --debug",
     "pkg:mac": "pkg . -t node16-mac-x64 -o app-mac --debug",
-    "pkg:linux": "pkg . -t node16-linux-x64 -o app-linux --debug"
+    "pkg:linux": "pkg . -t node16-linux-x64 -o app-linux --debug",
+    "jsonServer": "node server.js"
   },
   "dependencies": {
     "@alicloud/pop-core": "^1.7.13",
@@ -52,6 +53,7 @@
     "class-validator": "^0.14.0",
     "compression": "^1.7.4",
     "cos-nodejs-sdk-v5": "^2.11.19",
+    "data-fns": "^1.1.0",
     "dayjs": "^1.11.7",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.0.3",
@@ -84,7 +86,9 @@
     "swagger-ui-express": "^4.6.2",
     "typeorm": "^0.3.12",
     "uuid": "^9.0.0",
-    "wechatpay-node-v3": "^2.1.5"
+    "wechatpay-node-v3": "^2.1.5",
+    "express": "^4.18.2",
+    "date-fns": "^2.29.3"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

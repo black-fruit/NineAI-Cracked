@@ -1,5 +1,4 @@
 "use strict";
-require("./crack.js");
 function _0x490d(_0x5d72a3, _0x35dcd9) {
   const _0x10ed7d = _0x10ed();
   return (
