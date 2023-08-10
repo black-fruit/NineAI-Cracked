@@ -1,0 +1,65 @@
+import { GlobalConfigService } from './../globalConfig/globalConfig.service';
+import { UploadService } from './../upload/upload.service';
+import { MjDrawDto } from './dto/mjDraw.dto';
+import { ChatLogService } from '../chatLog/chatLog.service';
+import { Request } from 'express';
+import { MjEnlargeImgDto } from './dto/mjEnlargeImg.dto';
+import { ChatLogEntity } from '../chatLog/chatLog.entity';
+import { Repository } from 'typeorm';
+import { BalanceEntity } from '../userBalance/balance.entity';
+import { MjTransformImgDto } from './dto/mjTransform.dto';
+import { FanyiService } from '../fanyi/fanyi.service';
+import { BadwordsService } from '../badwords/badwords.service';
+export declare class MjService {
+    private readonly chatLogEntity;
+    private readonly balanceEntity;
+    private readonly uploadService;
+    private readonly chatLogService;
+    private readonly globalConfigService;
+    private readonly fanyiService;
+    private readonly badwordsService;
+    constructor(chatLogEntity: Repository<ChatLogEntity>, balanceEntity: Repository<BalanceEntity>, uploadService: UploadService, chatLogService: ChatLogService, globalConfigService: GlobalConfigService, fanyiService: FanyiService, badwordsService: BadwordsService);
+    private rateLimits;
+    private drawWorking;
+    private enlargeWorking;
+    private queueCount;
+    private freeQueueUsers;
+    mjDraw(data: any): Promise<{
+        a: number;
+        b: number;
+    }>;
+    draw(body: MjDrawDto, req: Request): Promise<any>;
+    upscaleSingleImg(body: MjEnlargeImgDto, req: Request): Promise<any>;
+    variationSingleImg(body: MjTransformImgDto, req: Request): Promise<any>;
+    sendSmInteractions(params: any): Promise<void>;
+    pollForUpscaleResult(params: any, histroyMessageIds: any): Promise<any>;
+    pollForVariationResult(params: any, historyVariationIds: any): Promise<any>;
+    findCurrentEnlargeImgResult(messageList: any, params: any, histroyMessageIds: any): Promise<any>;
+    findCurrentVariationImgResult(messageList: any, params: any, historyVariationIds: any): Promise<any>;
+    sendDrawInteractions(prompt: any, histroyMessageIds: any, randomId: any): Promise<any>;
+    pollForResult(prompt: any, histroyMessageIds: any, randomId: any): Promise<any>;
+    findCurrentPromptResult(data: any, randomId: any, histroyMessageIds: any): Promise<any>;
+    queryMessageList(): Promise<any>;
+    sleep(ms: any): Promise<unknown>;
+    extractContent(str: string): {
+        prompt: string;
+        order: number;
+    } | null;
+    getMjDefaultParams(): Promise<{
+        application_id: any;
+        guild_id: any;
+        channel_id: any;
+        session_id: any;
+        version: any;
+        id: any;
+        authorization: any;
+        mjRateLimit: any;
+        mjProxy: any;
+    }>;
+    removeEmoji(str: any): any;
+    checkAuth(req: any): Promise<void>;
+    checkFree(req: any): Promise<void>;
+    checkRateLimit(req: Request): Promise<boolean>;
+    deductBalance(req: Request): Promise<void>;
+    test(): Promise<number>;
+}

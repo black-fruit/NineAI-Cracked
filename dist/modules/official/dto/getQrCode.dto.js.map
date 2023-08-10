@@ -1,0 +1,1 @@
+{"version":3,"file":"getQrCode.dto.js","sourceRoot":"","sources":["../../../../src/modules/official/dto/getQrCode.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAA8I;AAC9I,6CAA8C;AAG9C,MAAa,YAAY;CAIxB;AAHC;IAAC,IAAA,qBAAW,EAAC,EAAE,OAAO,EAAE,qBAAqB,EAAE,WAAW,EAAE,YAAY,EAAE,QAAQ,EAAE,IAAI,EAAE,CAAC;IAC1F,IAAA,2BAAS,EAAC,EAAE,OAAO,EAAE,eAAe,EAAE,CAAC;;8CACvB;AAHnB,oCAIC"}

@@ -1,0 +1,93 @@
+import { UploadService } from './../upload/upload.service';
+import { UserService } from './../user/user.service';
+import { ConfigService } from 'nestjs-config';
+import { OnModuleInit } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { UserBalanceService } from '../userBalance/userBalance.service';
+import { ChatLogService } from '../chatLog/chatLog.service';
+import { ChatDrawDto } from './dto/chatDraw.dto';
+import { ConfigEntity } from '../globalConfig/config.entity';
+import { Repository } from 'typeorm';
+import { BadwordsService } from '../badwords/badwords.service';
+import { AutoreplyService } from '../autoreply/autoreply.service';
+import { GptKeysEntity } from './gptkeys.entity';
+import { GlobalConfigService } from '../globalConfig/globalConfig.service';
+import { AddKeyDto } from './dto/addKey.dto';
+import { GetKeyListDto } from './dto/getKeyList.dto';
+import { UpdateKeyDto } from './dto/updateKey.dto';
+import { WhiteListEntity } from './whiteList.entity';
+import { AddWhiteUserDto } from './dto/addWhiteUser.dto';
+import { UserEntity } from '../user/user.entity';
+import { UpdateWhiteUserDto } from './dto/updateWhiteUser.dto';
+import { DeleteKeyDto } from './dto/deleteKey.dto';
+import { FanyiService } from '../fanyi/fanyi.service';
+import { BulkCreateKeyDto } from './dto/bulkCreateKey.dto';
+import { AppEntity } from '../app/app.entity';
+export declare class ChatgptService implements OnModuleInit {
+    private readonly userEntity;
+    private readonly gptKeysEntity;
+    private readonly configEntity;
+    private readonly whiteListEntity;
+    private readonly appEntity;
+    private readonly configService;
+    private readonly userBalanceService;
+    private readonly chatLogService;
+    private readonly userService;
+    private readonly uploadService;
+    private readonly badwordsService;
+    private readonly autoreplyService;
+    private readonly globalConfigService;
+    private readonly fanyiService;
+    constructor(userEntity: Repository<UserEntity>, gptKeysEntity: Repository<GptKeysEntity>, configEntity: Repository<ConfigEntity>, whiteListEntity: Repository<WhiteListEntity>, appEntity: Repository<AppEntity>, configService: ConfigService, userBalanceService: UserBalanceService, chatLogService: ChatLogService, userService: UserService, uploadService: UploadService, badwordsService: BadwordsService, autoreplyService: AutoreplyService, globalConfigService: GlobalConfigService, fanyiService: FanyiService);
+    private api;
+    private whiteListUser;
+    private keyPool;
+    onModuleInit(): Promise<void>;
+    getRandomGptKeyDetail(type: any): Promise<import("@/common/utils").KeyItem>;
+    getGptParams(userId: any, inputOpt: any, systemMessage: any): Promise<{
+        options: any;
+        detailKeyInfo: any;
+    }>;
+    chatProcess(body: any, req: Request, res?: Response): Promise<any>;
+    draw(body: ChatDrawDto, req: Request): Promise<any[]>;
+    getKeyDetail(key: any): Promise<{
+        totalAmount: string;
+        useAmount: string;
+        balance: string;
+        isBindCard: any;
+        expirDate: string;
+        status: number;
+    } | {
+        status: number;
+        totalAmount?: undefined;
+        useAmount?: undefined;
+        balance?: undefined;
+        isBindCard?: undefined;
+        expirDate?: undefined;
+    }>;
+    getModelAndKeyFromUser(userId: any, modelType: any): Promise<any>;
+    getGptModelList(key: string): Promise<string[]>;
+    getKeyList(prams: GetKeyListDto, req: Request): Promise<{
+        rows: GptKeysEntity[];
+        count: number;
+    }>;
+    addKey(body: AddKeyDto): Promise<AddKeyDto & GptKeysEntity>;
+    bulkCreateKey(body: BulkCreateKeyDto): Promise<string>;
+    updateKey(body: UpdateKeyDto): Promise<string>;
+    deleteKey(body: DeleteKeyDto): Promise<string>;
+    getAllKeyList(): Promise<void>;
+    getUserWhiteList(): Promise<void>;
+    addWhiteUser(body: AddWhiteUserDto): Promise<AddWhiteUserDto & WhiteListEntity>;
+    updateWhiteUser(body: UpdateWhiteUserDto): Promise<string>;
+    getWhiteListUser(query: any, req: any): Promise<{
+        rows: WhiteListEntity[];
+        count: number;
+    }>;
+    lockKey(key: any): Promise<void>;
+    formatModelToken(detailKeyInfo: any): Promise<{
+        key: any;
+        maxToken: any;
+        maxTokenRes: any;
+        proxyUrl: any;
+    }>;
+}
